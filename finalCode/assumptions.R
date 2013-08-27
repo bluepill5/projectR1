@@ -58,7 +58,7 @@ slope = (quantile(residuals(coef.Filt, sd = FALSE)[0:end.date.index], p = .75) -
 intercept = quantile(residuals(coef.Filt, sd = FALSE)[0:end.date.index], 0.25) - slope*qnorm(0.25)
 qq_line = data.frame(intercept = intercept, slope = slope)
 
-qqplot.dlm <- qplot(sample = residuals(coef.Filt, sd = FALSE)[0:end.date.index], stat="qq") +
+graf.qqplot.dlm <- qplot(sample = residuals(coef.Filt, sd = FALSE)[0:end.date.index], stat="qq") +
    geom_abline(data = qq_line, aes(intercept = intercept, slope = slope)) +
    ggtitle("Normal Q-Q Plot (DLM)") +
    labs(x = "Cuantiles Teóricos") +
@@ -66,7 +66,7 @@ qqplot.dlm <- qplot(sample = residuals(coef.Filt, sd = FALSE)[0:end.date.index],
 
 # # jarque.bera.test(residuals(coef.Filt, sd = FALSE)[0:end.date.index])
 
-ggsave(qqplot.dlm, file="6a_qqplotDLM.pdf", path = directoryForImages) 
+ggsave(graf.qqplot.dlm, file="6a_qqplotDLM.pdf", path = directoryForImages) 
 
 # Saving the plot
 tsdiag(coef.Filt, gof.lag = 10)

@@ -4,8 +4,8 @@
 # require(ggmcmc)
 # require(coda)
 
-# directoryForCodes <- "L:/Tesis/MACHOTE/Code/Final Code"
-# directoryForImages <- "L:/Tesis/MACHOTE/LIBRO/Imagenes"
+# directoryForCodes <- "D:/__repositories__/projectR1/finalCode"
+# directoryForImages <- "D:/__repositories__/projectR1/images"
 
 file1 = paste(directoryForCodes, "/chain_1.rds", sep = "")
 file2 = paste(directoryForCodes, "/chain_2.rds", sep = "")
@@ -73,32 +73,32 @@ attr(ggmcmc.chain.dV,"nThin") = 1
 attr(ggmcmc.chain.dV,"description") = "Simulación"
 attr(ggmcmc.chain.dV,"parallel") = FALSE
 
-mcmc.histogram.dV <- ggs_histogram(ggmcmc.chain.dV) + 
+graf.mcmc.histogram.dV <- ggs_histogram(ggmcmc.chain.dV) + 
    my.theme +
    ggtitle("Histograma") +
    labs(x = "Valores") + 
    labs(y = "Cantidad")
 
-mcmc.running.means.dV <- ggs_running(ggmcmc.chain.dV) +
+graf.mcmc.running.means.dV <- ggs_running(ggmcmc.chain.dV) +
    my.theme2 +
    ggtitle("Medias Móviles del parámetro V") +
    labs(x = "Iteración") + 
    labs(y = "Media Móvil")
 
-mcmc.density.dV <- ggs_density(ggmcmc.chain.dV) + 
+graf.mcmc.density.dV <- ggs_density(ggmcmc.chain.dV) + 
    my.theme +
    ggtitle("Densidad Posterior") +
    labs(x = "Valores") + 
    labs(y = "Densidad")
 
-mcmc.traceplot.dV <- ggs_traceplot(ggmcmc.chain.dV) + 
+graf.mcmc.traceplot.dV <- ggs_traceplot(ggmcmc.chain.dV) + 
    my.theme +
    scale_linetype_manual(values = c(rep("solid", 11), rep("dashed", 1))) +
    ggtitle("Valores de la Simulación") +
    labs(x = "Iteración") + 
    labs(y = "Valores")
 
-mcmc.autocorrelation.dV <- ggs_autocorrelation(ggmcmc.chain.dV) + 
+graf.mcmc.autocorrelation.dV <- ggs_autocorrelation(ggmcmc.chain.dV) + 
    my.theme +
    ggtitle("Autocorrelaciones") +
    labs(x = "Retraso") + 
@@ -107,10 +107,10 @@ mcmc.autocorrelation.dV <- ggs_autocorrelation(ggmcmc.chain.dV) +
 # ggs_compare_partial(chain)
 
 # Saving the plot
-ggsave(mcmc.density.dV, file="dV_Densities.pdf", path = directoryForImages) 
-ggsave(mcmc.running.means.dV, file="dV_RunningMeans.pdf", path = directoryForImages) 
-ggsave(mcmc.traceplot.dV, file="dV_Traceplot.pdf", path = directoryForImages) 
-ggsave(mcmc.autocorrelation.dV, file="dV_Autocorrelation.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.density.dV, file="dV_Densities.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.running.means.dV, file="dV_RunningMeans.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.traceplot.dV, file="dV_Traceplot.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.autocorrelation.dV, file="dV_Autocorrelation.pdf", path = directoryForImages) 
 
 
 
@@ -136,31 +136,31 @@ attr(ggmcmc.chain.dW,"nThin") = 1
 attr(ggmcmc.chain.dW,"description") = "Simulación"
 attr(ggmcmc.chain.dW,"parallel") = FALSE
 
-mcmc.histogram.dW <- ggs_histogram(ggmcmc.chain.dW) + 
+graf.mcmc.histogram.dW <- ggs_histogram(ggmcmc.chain.dW) + 
    my.theme +
    ggtitle("Histogramas") +
    labs(x = "Valores") + 
    labs(y = "Cantidad")
 
-mcmc.running.means.dW <- ggs_running(ggmcmc.chain.dW) +
+graf.mcmc.running.means.dW <- ggs_running(ggmcmc.chain.dW) +
    my.theme2 +
    ggtitle("Medias Móviles del parámetro W") +
    labs(x = "Iteración") + 
    labs(y = "Media Móvil")
 
-mcmc.density.dW <- ggs_density(ggmcmc.chain.dW) + 
+graf.mcmc.density.dW <- ggs_density(ggmcmc.chain.dW) + 
    my.theme +
    ggtitle("Densidades Posteriores") +
    labs(x = "Valores") + 
    labs(y = "Densidad")
 
-mcmc.traceplot.dW <- ggs_traceplot(ggmcmc.chain.dW) + 
+graf.mcmc.traceplot.dW <- ggs_traceplot(ggmcmc.chain.dW) + 
    my.theme +
    ggtitle("Valores de la Simulación") +
    labs(x = "Iteración") + 
    labs(y = "Valor")
 
-mcmc.autocorrelation.dW <- ggs_autocorrelation(ggmcmc.chain.dW) + 
+graf.mcmc.autocorrelation.dW <- ggs_autocorrelation(ggmcmc.chain.dW) + 
    my.theme +
    ggtitle("Recorrido de alfa y beta (Filtering)") +
    labs(x = "Autocorrelación") + 
@@ -170,10 +170,10 @@ mcmc.autocorrelation.dW <- ggs_autocorrelation(ggmcmc.chain.dW) +
 # scale_colour_brewer(palette="Set1")
 
 # Saving the plot
-ggsave(mcmc.density.dW, file="dW_Densities.pdf", path = directoryForImages) 
-ggsave(mcmc.running.means.dW, file="dW_RunningMeans.pdf", path = directoryForImages) 
-ggsave(mcmc.traceplot.dW, file="dW_Traceplot.pdf", path = directoryForImages) 
-ggsave(mcmc.autocorrelation.dW, file="dW_Autocorrelation.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.density.dW, file="dW_Densities.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.running.means.dW, file="dW_RunningMeans.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.traceplot.dW, file="dW_Traceplot.pdf", path = directoryForImages) 
+ggsave(graf.mcmc.autocorrelation.dW, file="dW_Autocorrelation.pdf", path = directoryForImages) 
 
 # closing device
 dev.off()

@@ -4,7 +4,7 @@
 #  
 #  autor: Alexandro Mayoral <bluepills89@gmail.com>
 #  creado: Febrero 25, 2013
-#  ultima modificación: Mayo 29, 2013
+#  ultima modificación: Agosto 27, 2013
 #
 ###################################################################################################
 
@@ -13,9 +13,24 @@
 rm(list=ls())
 
 ###############################
+# Helper Function: source_https
+source_https <- function(url, ...) {
+  # load package
+  require(RCurl)
+  
+  # parse and evaluate each .R script
+  sapply(c(url, ...), function(u) {
+    eval(parse(text = getURL(u, followlocation = TRUE, cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))), envir = .GlobalEnv)
+  })
+}
+
+# Alternative if you wanna load a .R script from github
+# source_https("https://raw.github.com/bluepill5/projectR1/master/finalCode/myFunctions.R")
+
+###############################
 # Setting directory
-directoryForImages <- "L:/Tesis/MACHOTE/LIBRO/Imagenes"
-directoryForCodes <- "L:/Tesis/MACHOTE/Code/Final Code"
+directoryForImages <- "D:/__repositories__/projectR1/images"
+directoryForCodes <- "D:/__repositories__/projectR1/finalCode"
 
 ###############################
 # Import the functions, settings needed in the code and packages
@@ -26,7 +41,7 @@ install(c("PerformanceAnalytics", "quantmod", "dlm", "tseries", "grid", "reshape
 ###############################
 # Selecting the period of analysis and the horizont of time for the 
 # forecasting, and the type of method for the estimators ("mle" or "mcmc")
-type.est = "mle"
+type.est = "mcmc"
 start.date = "2012-01-01"
 end.date = "2012-12-31"
 horizont = "2013-03-31"
