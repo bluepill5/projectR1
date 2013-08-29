@@ -41,7 +41,7 @@ install(c("PerformanceAnalytics", "quantmod", "dlm", "tseries", "grid", "reshape
 ###############################
 # Selecting the period of analysis and the horizont of time for the 
 # forecasting, and the type of method for the estimators ("mle" or "mcmc")
-type.est = "mcmc"
+type.est = "mle"
 start.date = "2012-01-01"
 end.date = "2012-12-31"
 horizont = "2013-03-31"
