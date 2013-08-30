@@ -1,7 +1,7 @@
 ---
 title : Modelos Dinamicos Lineales
 subtitle : Aplicados a Series de Tiempo Lineales
-author : Alexandro Mayoral Terán
+author : Alexandro Mayoral Teran
 job : 
 framework : io2012 # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js # {highlight.js, prettify, highlight}
@@ -22,14 +22,22 @@ mode : selfcontained # {standalone, draft}
   * Estimaci&oacute;n y Predici&oacute;n de los Estados
   * Paquete dlm
 * __Implementaci&oacute;n__
-  * Datos
-  
+  * Descripci&oacute;n de los Datos
+  * Ajuste del Modelo
+  * Resultados  
 
 ---
 
-## Una imagen
+## Modelos de Espacio de Estados
+Un modelo de *Espacio de Estados* $\theta_0 \sim\mathcal{N}_p(m_0,C_0)$
 
-<img class=center src=assets/img/dW_Densities.svg height='60%'/>
+
+---
+
+## Modelos Din&aacute;micos Lineales
+$$\theta_0 \sim\mathcal{N}_p(m_0,C_0)\\
+Y_t=F_t\theta_t+v_t,\hspace{12mm} v_t \sim\mathcal{N}_m(0,V_t)\\
+\theta_t=G_t\theta_{t-1}+w_t,\hspace{12mm} w_t \sim\mathcal{N}_P(0,W_t)$$
 
 ---
 
@@ -92,7 +100,7 @@ rnorm
 ```
 function (n, mean = 0, sd = 1) 
 .External(C_rnorm, n, mean, sd)
-<bytecode: 0x0b6b5128>
+<bytecode: 0x0be8b224>
 <environment: namespace:stats>
 ```
 
@@ -145,3 +153,10 @@ __R reference card__
 
 * Roger's [Getting Help Video](http://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3)
 * Inspired by Eric Raymond's "How to ask questions the smart way"
+
+
+---
+
+## Una imagen
+
+<img class=center src=assets/img/dW_Densities.svg height='60%'/>
