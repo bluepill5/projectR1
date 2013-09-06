@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Modelos Dinamicos Lineales</title>
+  <title>Modelos Dinámicos Lineales</title>
   <meta charset="utf-8">
-  <meta name="description" content="Modelos Dinamicos Lineales">
-  <meta name="author" content="Alexandro Mayoral Teran">
+  <meta name="description" content="Modelos Dinámicos Lineales">
+  <meta name="author" content="Alexandro Mayoral Terán">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -33,9 +33,9 @@
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
-    <h1>Modelos Dinamicos Lineales</h1>
+    <h1>Modelos Dinámicos Lineales</h1>
     <h2>Aplicados a Series de Tiempo Lineales</h2>
-    <p>Alexandro Mayoral Teran<br/></p>
+    <p>Alexandro Mayoral Terán<br/></p>
   </hgroup>
   <article></article>  
 </slide>
@@ -54,7 +54,7 @@
 <li>Modelos de Espacio de Estados</li>
 <li>Modelos Din&aacute;micos Lineales</li>
 <li>Estimaci&oacute;n y Predici&oacute;n de los Estados</li>
-<li>Paquete dlm</li>
+<li>Paquete <em>dlm</em></li>
 </ul></li>
 <li><strong>Implementaci&oacute;n</strong>
 
@@ -74,7 +74,9 @@
     <h2>Modelos de Espacio de Estados</h2>
   </hgroup>
   <article data-timings="">
-    <p>Un modelo de <em>Espacio de Estados</em> \(\theta_0 \sim\mathcal{N}_p(m_0,C_0)\)</p>
+    <p>La idea de los <em>Modelos de Espacio de Estados</em> surge en los 70&#39;s, al buscar formas modelar sistemas din&aacute;micos (es decir, sistemas que varian con el tiempo), como ejemplo de un sistema din&aacute;mico se puede considerar los rendimientos de alguna acci&oacute;n, donde el valor de los rendimiento se consideran la salida del sistema.</p>
+
+<p><img class=center src=assets/img/AAPL.svg height='80%' width='80%'/></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -82,12 +84,23 @@
 
 <slide class="" id="slide-3" style="background:;">
   <hgroup>
-    <h2>Modelos Din&aacute;micos Lineales</h2>
+    <h2>&#191;Como modelar el sistema?</h2>
   </hgroup>
   <article data-timings="">
-    <p>\[\theta_0 \sim\mathcal{N}_p(m_0,C_0)\\
-Y_t=F_t\theta_t+v_t,\hspace{12mm} v_t \sim\mathcal{N}_m(0,V_t)\\
-\theta_t=G_t\theta_{t-1}+w_t,\hspace{12mm} w_t \sim\mathcal{N}_P(0,W_t)\]</p>
+    <p>Sabemos que el comportamieto de una sucesi&oacute;n de variables aleatorias (\(Y_t\)) queda especificado por su distribuci&oacute;n conjunta, pero obtenerla en el caso de una serie de tiempo puede llegar a ser muy complicado, <em>&#191;Qu&eacute; podemos hacer?</em>.</p>
+
+<ul>
+<li><p>De este problema surge la idea de usar una sucesi&oacute;n de variables aleatorias (\(\theta_t\)), que sirvan como auxiliares en el modelamiento de la distribuci&oacute;n conjunta de la serie.</p></li>
+<li><p>Para ello esta sucesi&oacute;n debe cumplir con la propiedad de <em>Markov</em>.</p></li>
+<li><p>Con este planteamiento el modelo quedar&iacute; espec&iacute;ficado con la distribuci&oacute;n inicial de \( \theta_0\).</p></li>
+</ul>
+
+<p>Entonces, un <strong>modelo de espacio de estados</strong> consiste de las series de tiempo real valuadas \((\theta_t : t=0,1, \ldots ) \in R^p\)  y \((y_t : t=0,1, \ldots ) \in R^m\)  que satisfacen:</p>
+
+<ol>
+<li>(\(\theta_t\)) es una cadena de Markov.</li>
+<li>Condicionando sobre \(\theta_t\) las \(Y_t^\prime s\) son independientes, es decir \(Y_t\) depende solamente de \(\theta_t\).</li>
+</ol>
 
   </article>
   <!-- Presenter Notes -->
@@ -95,30 +108,20 @@ Y_t=F_t\theta_t+v_t,\hspace{12mm} v_t \sim\mathcal{N}_m(0,V_t)\\
 
 <slide class="" id="slide-4" style="background:;">
   <hgroup>
-    <h2>Where to look for different types of questions</h2>
+    <h2>Un caso particular: Los Modelos Din&aacute;micos Lineales</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>R programming (see also: <a href="http://bit.ly/Ufaadn">http://bit.ly/Ufaadn</a>)
+    <p>Un <strong>Modelo Din&aacute;mico Lineal</strong> queda determinado por la distribuci&oacute;n inicial de \(\theta_0\), es decir:
+\[
+\theta_0 \sim\mathcal{N}_p(m_0,C_0)
+\]
+junto con el par de ecuaciones para cada tiempo \(t\geq1\),
+\[
+Y_t=F_t\theta_t+v_t,\hspace{12mm} v_t \sim\mathcal{N}_m(0,V_t)\\
+\theta_t=G_t\theta_{t-1}+w_t,\hspace{12mm} w_t \sim\mathcal{N}_P(0,W_t)
+\]</p>
 
-<ul>
-<li>Search the archive of the class forums</li>
-<li>Read the manual/help files</li>
-<li>Search on the web</li>
-<li>Ask a skilled friend</li>
-<li>Post to the class forums</li>
-<li>Post to the <a href="http://www.r-project.org/mail.html">R mailing list</a> or <a href="http://stackoverflow.com/">Stackoverflow</a></li>
-</ul></li>
-<li>Data Analysis/Statistics
-
-<ul>
-<li>Search the archive of the class forums</li>
-<li>Search on the web</li>
-<li>Ask a skilled friend</li>
-<li>Post to the class forums</li>
-<li>Post to <a href="http://stats.stackexchange.com/">CrossValidated</a></li>
-</ul></li>
-</ul>
+<p>La primera ecuaci&oacute;n es conocida como la <strong>ecuaci&oacute;n de las observaciones</strong>, mientras que la segunda, se le conoce como la <strong>ecuaci&oacute;n de los estados</strong> o <strong>sistema de ecuaciones</strong>. Se asume adem&aacute;s, que \(\theta_0\) es independiente de \((v_t)\) y \((w_t)\).</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -126,28 +129,16 @@ Y_t=F_t\theta_t+v_t,\hspace{12mm} v_t \sim\mathcal{N}_m(0,V_t)\\
 
 <slide class="" id="slide-5" style="background:;">
   <hgroup>
-    <h2>Some important R functions</h2>
+    <h2>Estimaci&oacute;n y predicci&oacute;n de los estados</h2>
   </hgroup>
   <article data-timings="">
-    <p><strong>Access help file</strong></p>
+    <p>Si disponemos de una serie de tiempo hasta el tiempo \(t\), es decir \(y_{1:t}\), si buscamos hacer inferencia de los estados, necesitamos conocer la densidad condicional \(\pi(\theta_s\mid y_{1:t})\), de lo cual podemos observar tres casos: </p>
 
-<pre><code class="r">
-?rnorm
-</code></pre>
-
-<p><strong>Search help files</strong></p>
-
-<pre><code class="r">help.search(&quot;rnorm&quot;)
-</code></pre>
-
-<p><strong>Get arguments</strong></p>
-
-<pre><code class="r">args(&quot;rnorm&quot;)
-</code></pre>
-
-<pre><code>function (n, mean = 0, sd = 1) 
-NULL
-</code></pre>
+<ul>
+<li><strong>Filtraci&oacute;n</strong> cuando \(s=t\)</li>
+<li><strong>Predicci&oacute;n</strong> cuando \(s>t\)</li>
+<li><strong>Suavizamiento</strong> o <strong>an&aacute;lisis retrospectivo</strong> cuando \(s&#60;t\)</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -155,23 +146,18 @@ NULL
 
 <slide class="" id="slide-6" style="background:;">
   <hgroup>
-    <h2>Some important R functions</h2>
+    <h2>Filtraci&oacute;n (Filtering)</h2>
   </hgroup>
   <article data-timings="">
-    <p><strong>See code</strong></p>
+    <p><strong>Idea:</strong></p>
 
-<pre><code class="r">rnorm
-</code></pre>
+<ol>
+<li><p>Se obtiene la distribuci&oacute;n predectiva del estado \(\theta_t\), dada las observaciones \(y_{1:t-1}\), (i.e. \(\pi(\theta_t\mid y_{1:t-1}))\), usando la densidad <em>filtrada</em> \(\pi(\theta_{t-1}\mid y_{1:t-1})\) y la distribuci&oacute;n condicional \(\pi(\theta_t\mid \theta_{t-1})\)</p></li>
+<li><p>Se obtiene la distribuci&oacute;n predictiva de la siguiente observaci&oacute;n \(y_t\) dado las observaciones anteriores \(y_{1:t-1}\), (i.e. \(\pi(y_t\mid y_{1:t-1}))\)</p></li>
+<li><p>Se obtiene la distribuci&oacute;n filtrada \(\pi(\theta_t\mid y_{1:t})\) usando la regla de Bayes con  \(\pi(\theta_t\mid y_{1:t-1})\) como la distribuci&oacute;n apriori y \(\pi(y_t \mid \theta_t)\) como la de m&aacute;xima verosimilitud.</p></li>
+</ol>
 
-<pre><code>function (n, mean = 0, sd = 1) 
-.External(C_rnorm, n, mean, sd)
-&lt;bytecode: 0x0be8b224&gt;
-&lt;environment: namespace:stats&gt;
-</code></pre>
-
-<p><strong>R reference card</strong></p>
-
-<p><a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf">http://cran.r-project.org/doc/contrib/Short-refcard.pdf</a></p>
+<p>Partiendo de la distribuci&oacute;n inicial \(\theta_0\sim\pi(\theta_0)\), los pasos anteriores se pueden realizar de manera recursiva, para \(t=1,2,\ldots\)</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -179,30 +165,31 @@ NULL
 
 <slide class="" id="slide-7" style="background:;">
   <hgroup>
-    <h2>Be specific in the title of your questions</h2>
+    <h2>Filtro de Kalman: Filtering</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li><p>Bad:</p>
+    <p>Consideremos el DLM, y supongamos:
+\[\theta_{t-1}\mid y_{1:t-1} \sim\mathcal{N}(m_{t-1},C_{t-1})\]
+Entonces los siguientes enunciados se cumplen:</p>
 
-<ul>
-<li>HELP! Can&#39;t fit linear model!</li>
-<li>HELP! Don&#39;t understand PCA!</li>
-</ul></li>
-<li><p>Better</p>
-
-<ul>
-<li>R 2.15.0 lm() function produces seg fault with large data frame, Mac OS X
-10.6.3</li>
-<li>Applied principal component analysis to a matrix - what are U, D, and \(V^T\)?</li>
-</ul></li>
-<li><p>Even better</p>
-
-<ul>
-<li>R 2.15.0 lm() function on Mac OS X 10.6.3 -- seg fault on large data frame</li>
-<li>Using principal components to discover common variation in rows of a matrix, should I use U, D or \(V^T\)?</li>
-</ul></li>
-</ul>
+<ol>
+<li>La distribuci&oacute;n predictiva (del primer paso) de \(\theta_t\) dado \(y_{1:t-1}\) es Gaussiana con par&aacute;metros:
+\[
+a_t=E(\theta_t\mid y_{1:t-1})=G_tm_{t-1},
+R_t=Var(\theta_t\mid y_{1:t-1})=G_tC_{t-1}G'_t+W_t
+\]</li>
+<li>La distribuci&oacute;n predictiva (del primer paso) de \(Y_t\) dado \(y_{1:t-1}\) es Gaussiana con par&aacute;metros:
+\[
+f_t=E(Y_t\mid y_{1:t-1})=F_ta_t,
+Q_t=Var(Y_t\mid y_{1:t-1})=F_tR_tF'_t+V_t.
+\]</li>
+<li>La distribuci&oacute;n filtrada de \(\theta_t\) dado \(y_{1:t}\) es Gaussiana con par&aacute;metros:
+\[
+m_t=E(\theta_t\mid y_{1:t})=a_t+R_tF'_tQ^{-1}_te_t,
+C_t=Var(\theta_t\mid y_{1:t})=R_t-R_tF'_tQ^{-1}_tF_tR_t
+\]
+donde \(e_t=Y_t-f_t\), el error de predicci&oacute;n.</li>
+</ol>
 
   </article>
   <!-- Presenter Notes -->
@@ -210,27 +197,18 @@ NULL
 
 <slide class="" id="slide-8" style="background:;">
   <hgroup>
-    <h2>A note on Googling data analysis questions</h2>
+    <h2>Filtro de Kalman: Suavizamiento</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>The best place to start for general questions is our forum</li>
-<li><a href="http://stackoverflow.com/">Stackoverflow</a>,<a href="http://www.r-project.org/mail.html">R mailing list</a> for software questions, <a href="http://stats.stackexchange.com/">CrossValidated</a> for more general questions</li>
-<li>Otherwise Google &quot;[data type] data analysis&quot; or &quot;[data type] R package&quot;</li>
-<li>Try to identify what data analysis is called for your data type
-
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Biostatistics">Biostatistics</a> for medical data</li>
-<li><a href="http://en.wikipedia.org/wiki/Data_science">Data Science</a> for data from web analytics</li>
-<li><a href="http://en.wikipedia.org/wiki/Machine_learning">Machine learning</a> for data in computer science/computer vision</li>
-<li><a href="http://en.wikipedia.org/wiki/Natural_language_processing">Natural language processing</a> for data from texts</li>
-<li><a href="http://en.wikipedia.org/wiki/Signal_processing">Signal processing</a> for data from electrical signals</li>
-<li><a href="http://en.wikipedia.org/wiki/Business_analytics">Business analytics</a> for data on customers</li>
-<li><a href="http://en.wikipedia.org/wiki/Econometrics">Econometrics</a> for economic data</li>
-<li><a href="http://en.wikipedia.org/wiki/Statistical_process_control">Statistical process control</a> for data about industrial processes</li>
-<li>etc.</li>
-</ul></li>
-</ul>
+    <p>Consideremos un DLM, si:
+\[\theta_{t+1}\mid y_{1:T} \sim\mathcal{N}(s_{t+1},S_{t+1})\]
+entonces:
+\[\theta_{t}\mid y_{1:T} \sim\mathcal{N}(s_{t},S_{t})\]
+donde:
+\[
+s_t = m_t+C_tG_{t+1}'R_{t+1}^{-1}(s_{t+1}-a_{t+1}),\\
+S_t = C_t-C_tG_{t+1}'R_{t+1}^{-1}(R_{t+1}-S_{t+1})R_{t+1}^{-1}G_{t+1}C_t
+\]</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -238,13 +216,30 @@ NULL
 
 <slide class="" id="slide-9" style="background:;">
   <hgroup>
-    <h2>Credits</h2>
+    <h2>Predicci&oacute;n</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>Roger&#39;s <a href="http://www.youtube.com/watch?v=ZFaWxxzouCY&amp;list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&amp;index=3">Getting Help Video</a></li>
-<li>Inspired by Eric Raymond&#39;s &quot;How to ask questions the smart way&quot;</li>
-</ul>
+    <p>Considera el DLM, y supongamos que: \(a_t(0)=m_t\) y \(R_t(0)=C_t\).
+Entonces los siguientes enunciados se cumplen:</p>
+
+<ol>
+<li>La distribuci&oacute;n predictiva de \(\theta_{t+k}\) dado \(y_{1:t-1}\) es Gaussiana con par&aacute;metros:
+\[
+a_t(k) = G_{t+k}a_{t}(k-1),\\
+R_t(k) = G_{t+k}R_{t}(k-1)G'_{t+k}+W_{t+k}.
+\]</li>
+<li>La distribuci&oacute;n predictiva de \(Y_{t+k}\) dado \(y_{1:t}\) es Gaussiana con par&aacute;metros:
+\[
+f_t(k) = F_{t+k}a_t(k),\\
+Q_t(k) = F_{t+k}R_t(k)F'_{t+k}+V_{t+k}.
+\]</li>
+</ol>
+
+<p>Donde, para \(k\geq 1\), definimos:
+\[
+a_{t+k}(k)=E(\theta_{t+k}\mid y_{1:t}), \hspace{5mm} R_{t+k}(k)=Var(\theta_{t+k}\mid y_{1:t}),\\
+f_{t+k}(k)=E(Y_{t+k}\mid y_{1:t}), \hspace{5mm} Q_{t+k}(k)=Var(Y_{t+k}\mid y_{1:t}).
+\]</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -252,10 +247,54 @@ NULL
 
 <slide class="" id="slide-10" style="background:;">
   <hgroup>
-    <h2>Una imagen</h2>
+    <h2>Paquete <em>dlm</em></h2>
   </hgroup>
   <article data-timings="">
-    <p><img class=center src=assets/img/dW_Densities.svg height='60%'/></p>
+    <p><strong>Creaci&oacute;n de un Modelo Din&aacute;mico Lineal</strong></p>
+
+<pre><code class="r">
+?dlm
+</code></pre>
+
+<p><strong>Filtro de Kalman</strong></p>
+
+<pre><code class="r">
+?dlmFilter
+</code></pre>
+
+<p><strong>Suavizamiento</strong></p>
+
+<pre><code class="r">
+?dlmSmooth
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Paquete <em>dlm</em></h2>
+  </hgroup>
+  <article data-timings="">
+    <p><strong>Predicci&oacute;n</strong></p>
+
+<pre><code class="r">
+?dlmForecast
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Credits</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><a href="https://github.com/bluepill5">bluepills89@gmail.com</a></li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -279,50 +318,62 @@ NULL
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Modelos Din&aacute;micos Lineales'>
+        data-slide=3 title='&#191;Como modelar el sistema?'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Where to look for different types of questions'>
+        data-slide=4 title='Un caso particular: Los Modelos Din&aacute;micos Lineales'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='Some important R functions'>
+        data-slide=5 title='Estimaci&oacute;n y predicci&oacute;n de los estados'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='Some important R functions'>
+        data-slide=6 title='Filtraci&oacute;n (Filtering)'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Be specific in the title of your questions'>
+        data-slide=7 title='Filtro de Kalman: Filtering'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='A note on Googling data analysis questions'>
+        data-slide=8 title='Filtro de Kalman: Suavizamiento'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Credits'>
+        data-slide=9 title='Predicci&oacute;n'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='Una imagen'>
+        data-slide=10 title='Paquete <em>dlm</em>'>
          10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Paquete <em>dlm</em>'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Credits'>
+         12
       </a>
     </li>
   </ul>
